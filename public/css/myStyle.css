@@ -1,0 +1,63 @@
+.bi-lightning-charge::before{
+  margin-right: 1rem;
+  font-size: 1.9rem;
+}
+
+
+/* SIDEBAR */
+.sidebar{
+  width: 280px;
+  transition: 0.3s;
+}
+
+.small-sidebar{
+  width: 77px;
+}
+
+.small-sidebar .sidebar-text{
+  display: none;
+}
+
+
+/* Logo */
+.bi-lightning-charge{
+  rotate: 30deg;
+  transition: 1s;
+  margin-top: 1.1rem;
+}
+
+.small-sidebar .bi-lightning-charge{
+ 
+  margin-top: 2.5rem;
+}
+
+
+.small-sidebar .bi-x-circle::before {
+  content: "\F134";
+  transition: 1s;
+}
+
+
+.small-sidebar .bi-lightning-charge::before {
+  content: "\F46C";
+  transform: rotateY(360deg);
+  transition: 1s;
+  margin-left: 0.55rem;
+}
+
+
+
+.bi-x-circle{
+  font-size: 1.4rem;
+  transition: 0.25s;
+  color: #adb5bd;
+}
+
+
+.bi-x-circle:hover{
+  font-size: 1.5rem;
+ 
+  color: #fff;
+}
+
+

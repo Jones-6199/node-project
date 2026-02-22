@@ -1,0 +1,40 @@
+{
+  "name": "livereload",
+  "description": "LiveReload server",
+  "version": "0.10.3",
+  "contributors": [
+    {
+      "name": "Brian P. Hogan",
+      "email": "brianhogan@napcs.com"
+    }
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/napcs/node-livereload.git"
+  },
+  "bin": {
+    "livereload": "./bin/livereload.js"
+  },
+  "main": "./lib/livereload.js",
+  "dependencies": {
+    "chokidar": "^4.0.3",
+    "livereload-js": "^4.0.2",
+    "opts": "^2.0.2",
+    "ws": "^8.4.3"
+  },
+  "devDependencies": {
+    "coffeescript": "^2.7.0",
+    "mocha": "^11.7.1",
+    "should": "^13.2.1",
+    "sinon": "^1.17.4"
+  },
+  "engines": {
+    "node": ">=8.0.0"
+  },
+  "scripts": {
+    "build": "npx coffee -c lib",
+    "make-test-certs": "bash certs.sh",
+    "test": "npm run build && (rm -f test/tmpfile*; NODE_EXTRA_CA_CERTS=./test/ssl/test-root.pem npx mocha)"
+  }
+}
