@@ -216,10 +216,11 @@
               Customer Home page</a
             >
 
-            <form class="d-flex" role="search">
+            <form class="d-flex" role="search" method="post" action="/search"  >
               <input
                 class="form-control me-2"
                 type="search"ه
+                name="searchText"
                 placeholder="Search"
                 aria-label="Search"
               />
@@ -230,67 +231,93 @@
           </div>
         </nav>
 
-        <table
-          style="width: 99%"
-          class="text-center mx-auto table mt-5 table-striped table-bordered"
-        >
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Full Name</th>
-              <th scope="col">Gender</th>
-              <th scope="col">Country</th>
-              <th scope="col">Age</th>
-              <th scope="col">Last updated</th>
-              <th scope="col">Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% data.forEach((i, index) => { %>
-              <tr>
-              <th scope="row"> <%= index +1  %>  </th>
-              <td> <%= i.firstName %> <%= i.lastName %>		</td>
-              <td><%= i.customerGender %>	</td>
-              <td> <%= i.customerCountry %> </td>
-              <td> <%= i.customerAge %> </td>
-              <td>  <%= moment(i.updatedAt).fromNow() %>           </td>
-              <td>
-                <a
-                  data-bs-toggle="tooltip"
-                  data-bs-title="View details"
-                  data-bs-placement="top"
-                  class="btn btn-primary btn-sm"
-                  href="./view/<%= i.id  %>"
-                  ><i class="bi bi-eye"></i
-                ></a>
+     <% if (data.length === 0) { %>
 
-                <a
-                  data-bs-toggle="tooltip"
-                  data-bs-title="Edit user"
-                  data-bs-placement="top"
-                  class="btn btn-primary btn-sm"
-                  href="./edit/<%= i.id  %>"
-                >
-                  <i class="bi bi-pencil"></i>
-                </a>
+  <div class="alert alert-warning text-center">
+    There is no data for now.
+  </div>
 
-            <form style="display: inline;"  action="/edit/<%= i.id  %>?_method=DELETE" method="post">
-                  <button
-                    type="submit"
-                    data-bs-toggle="tooltip"
-                    data-bs-title="Delete user"
-                    data-bs-placement="top"
-                    class="btn btn-danger btn-sm"
-                  >
-                    <i class="bi bi-trash"></i>
-                  </button>
+<% } else { %>
+
+  <table
+    style="width: 99%"
+    class="text-center mx-auto table mt-5 table-striped table-bordered"
+  >
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Full Name</th>
+        <th scope="col">Gender</th>
+        <th scope="col">Country</th>
+        <th scope="col">Age</th>
+        <th scope="col">Last updated</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% data.forEach((i, index) => { %>
+        <tr>
+          <th scope="row"><%= index + 1 %></th>
+
+          <td>
+            <%= i.firstName %> <%= i.lastName %>
+          </td>
+
+          <td><%= i.customerGender %></td>
+
+          <td><%= i.customerCountry %></td>
+
+          <td><%= i.customerAge %></td>
+
+          <td>
+            <%= moment(i.updatedAt).fromNow() %>
+          </td>
+
+          <td>
+            <!-- View Button -->
+            <a
+              class="btn btn-primary btn-sm"
+              href="/view/<%= i._id %>"
+              data-bs-toggle="tooltip"
+              data-bs-title="View details"
+            >
+              <i class="bi bi-eye"></i>
+            </a>
+
+            <!-- Edit Button -->
+            <a
+              class="btn btn-primary btn-sm"
+              href="/edit/<%= i._id %>"
+              data-bs-toggle="tooltip"
+              data-bs-title="Edit user"
+            >
+              <i class="bi bi-pencil"></i>
+            </a>
+
+            <!-- Delete Button -->
+            <form
+              style="display: inline;"
+              action="/edit/<%= i._id %>?_method=DELETE"
+              method="POST"
+            >
+              <button
+                type="submit"
+                class="btn btn-danger btn-sm"
+                data-bs-toggle="tooltip"
+                data-bs-title="Delete user"
+              >
+                <i class="bi bi-trash"></i>
+              </button>
             </form>
 
+          </td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
 
-              </td>
-            </tr>
-            <% }) %>
-
+<% } %>
             
      
 
@@ -300,10 +327,8 @@
 
 
 
-      
-      
-          </tbody>
-        </table>
+
+
       </section>
     </main>
     <script src="./js/bootstrap.bundle.min.js"></script>
